@@ -15,7 +15,7 @@ const Rodape = () =>{
                 }`}
             </style>
             <Container className='text-center'>
-                <h1 className='lead'>Rodape</h1>
+                <h1 className='lead'>Sed semper feugiat tortor, id cursus lectus sagittis sed. Phasellus sagittis est arcu, eu aliquam turpis semper se</h1>
             </Container>
         </Jumbotron>
     )

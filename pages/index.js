@@ -1,14 +1,23 @@
 import React from 'react';
 
+import Head from 'next/head';
 import Menu from '../componets/Menu';
 import Rodape from '../componets/Rodape';
 
 import { Container, Jumbotron } from 'reactstrap';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+library.add(fas)
 
 function Home() {
   return (
     <div>
+      <Head>
+        <title>Home - JWFelipe</title>
+        <meta name='description' content='Pagina home do site de orçamentos de serviços' />
+      </Head>
       <Menu />
       <Jumbotron fluid className="descr-top">
         <style>
@@ -52,7 +61,7 @@ function Home() {
           <div className='row'>
             <div className='col-md-4'>
               <div className='rounded-circle circulo centralizar'>
-                A
+                <FontAwesomeIcon icon='laptop-code' />
               </div>
               <h2 className='mt-4 mb-4'>Serviço 1</h2>
               <p>
@@ -61,20 +70,20 @@ function Home() {
             </div>
             <div className='col-md-4'>
               <div className='rounded-circle circulo centralizar'>
-                B
+                <FontAwesomeIcon icon='mobile-alt' />
               </div>
               <h2 className='mt-4 mb-4'>Serviço 2</h2>
               <p>
-              Sed semper feugiat tortor, id cursus lectus sagittis sed. Phasellus sagittis est arcu, eu aliquam turpis semper se
+                Sed semper feugiat tortor, id cursus lectus sagittis sed. Phasellus sagittis est arcu, eu aliquam turpis semper se
               </p>
             </div>
             <div className='col-md-4'>
               <div className='rounded-circle circulo centralizar'>
-                C
+              <FontAwesomeIcon icon='network-wired' />
               </div>
               <h2 className='mt-4 mb-4'>Serviço 3</h2>
               <p>
-              vitae porttitor lorem porta. Integer tristique eu metus id molestie.
+                vitae porttitor lorem porta. Integer tristique eu metus id molestie.
               </p>
             </div>
           </div>
