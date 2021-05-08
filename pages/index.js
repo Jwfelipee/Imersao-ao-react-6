@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Menu from '../componets/Menu'
-import Rodape from '../componets/Rodape'
+import Menu from '../componets/Menu';
+import Rodape from '../componets/Rodape';
 
 import { Container, Jumbotron } from 'reactstrap';
 
