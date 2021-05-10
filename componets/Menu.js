@@ -20,7 +20,7 @@ const Menu = (props) => {
         <div>
             <Navbar color="secondary" dark expand="md">
                 <Container>
-                    <NavbarBrand href="/">JW.Felipee</NavbarBrand>
+                    <NavbarBrand href="/">JW.Felipe{/* Fiz um Ajuste Aqui */}</NavbarBrand>
                     <NavbarToggler onClick={toggle} />
                     <Collapse isOpen={isOpen} navbar>
                         <Nav className="mr-auto" navbar>
@@ -28,7 +28,7 @@ const Menu = (props) => {
                                 <NavLink href="/">Home</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/orcamento">Orçamentos</NavLink>
+                                <NavLink href="/orcamento">Budgets{/* Fiz um Ajuste Aqui traduzindo para English */}</NavLink>
                             </NavItem>
                             {/* <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
