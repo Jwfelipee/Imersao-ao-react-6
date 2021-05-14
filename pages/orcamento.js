@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Menu from '../componets/Menu';
 import Rodape from '../componets/Rodape';
@@ -7,6 +7,38 @@ import Head from 'next/head';
 import { Container, Jumbotron, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 function Orcamento() {
+  const [orcamento, setOcamento] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    whatsApp: "",
+    project: ""
+  })
+
+  const onChangeInput = e => setOcamento({ ...orcamento, [e.target.name]: e.target.value })
+
+  const sendOrcamento = async e => {
+    e.preventDefault();
+    console.log(orcamento);
+
+    try {
+      const res = await fetch('http://localhost:8080/orcamento', {
+        method: 'POST',
+        body: JSON.stringify(orcamento),
+        headers: { 'Content-Type': 'application/json' }
+      })
+
+      const responseEnv = await res.json();
+
+      if (responseEnv.error) {
+        alert(responseEnv.message)
+      } else {
+        alert(responseEnv.message)
+      }
+    }catch (err) {
+      alert("ERRO: orçamento nao enviado com sucesso")
+    }
+  }
   return (
     <div>
       <Head>
@@ -39,30 +71,35 @@ function Orcamento() {
             }`}
         </style>
         <Container>
-          <Form>
+          <Form onSubmit={sendOrcamento}>
             <FormGroup className='mt-3'>
               <Label for="name">Nome</Label>
-              <Input type="text" name="name" id="name" placeholder="preencha com o nome completo" />
+              <Input type="text" name="name" id="name" placeholder="preencha com o nome completo"
+                onChange={onChangeInput} />
             </FormGroup>
 
             <FormGroup className='mt-3'>
               <Label for="email">E-mail</Label>
-              <Input type="email" name="email" id="email" placeholder="preencha com o seu melhor e-mail" />
+              <Input type="email" name="email" id="email" placeholder="preencha com o seu melhor e-mail"
+                onChange={onChangeInput} />
             </FormGroup>
 
             <FormGroup className='mt-3'>
               <Label for="phone">Telefone</Label>
-              <Input type="text" name="phone" id="phone" placeholder="(XX) XXXX-XXXX" />
+              <Input type="text" name="phone" id="phone" placeholder="(XX) XXXX-XXXX"
+                onChange={onChangeInput} />
             </FormGroup>
 
             <FormGroup className='mt-3'>
               <Label for="whatsApp">WhatsApp</Label>
-              <Input type="text" name="whatsApp" id="whatsApp" placeholder="(XX) XXXXX-XXXX" />
+              <Input type="text" name="whatsApp" id="whatsApp" placeholder="(XX) XXXXX-XXXX"
+                onChange={onChangeInput} />
             </FormGroup>
 
             <FormGroup className='mt-3'>
               <Label for="project">Projeto</Label>
-              <Input type="textarea" name="project" id="project" placeholder="Fale um pouco do seu projeto" />
+              <Input type="textarea" name="project" id="project" placeholder="Fale um pouco do seu projeto"
+                onChange={onChangeInput} />
             </FormGroup>
 
 

@@ -11,7 +11,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 library.add(fas)
 
-function Home() {
+function Home({ data }) {
   return (
     <div>
       <Head>
@@ -19,6 +19,7 @@ function Home() {
         <meta name='description' content='Pagina home do site de orçamentos de serviços' />
       </Head>
       <Menu />
+
       <Jumbotron fluid className="descr-top">
         <style>
           {`.descr-top{
@@ -38,10 +39,10 @@ function Home() {
           }`}
         </style>
         <Container className="text-center">
-          <h1 className="display-4">Temos a solução que a sua empresa precisa!</h1>
-          <p className="lead">This is a simple hero unit, a simple Jumbotron-style component for calling extra attention to featured content or information.</p>
+          <h1 className="display-4">{data.home.topTitulo}</h1>
+          <p className="lead">{data.home.topSubTitulo} </p>
           <p className="lead">
-            <a href='/orcamento' className='btn btn-outline-info btn-lg mt-4 mb-4'>Orçamento</a>
+            <a href={data.home.topLinkBtn} className='btn btn-outline-info btn-lg mt-4 mb-4'>{data.home.topTextoBtn}</a>
           </p>
         </Container>
       </Jumbotron>
@@ -55,36 +56,30 @@ function Home() {
         </style>
         <Container className='text-center'>
           <div>
-            <h2 className='display-4'>serviços</h2>
-            <p calssName='lead pb-4'>Duis dictum sem in massa convallis, vitae porttitor lorem porta. Integer tristique eu metus id molestie.</p>
+            <h2 className='display-4'>{data.home.serTitulo}</h2>
+            <p className='lead pb-4'>{data.home.serSubTitulo}</p>
           </div>
           <div className='row'>
             <div className='col-md-4'>
               <div className='rounded-circle circulo centralizar'>
-                <FontAwesomeIcon icon='laptop-code' />
+                <FontAwesomeIcon icon={data.home.serUmIcone} />
               </div>
-              <h2 className='mt-4 mb-4'>Serviço 1</h2>
-              <p>
-                Morbi scelerisque scelerisque tellus ut lobortis.
-              </p>
+              <h2 className='mt-4 mb-4'>{data.home.serUmTitulo}</h2>
+              <p>{data.home.serUmDesc}</p>
             </div>
             <div className='col-md-4'>
               <div className='rounded-circle circulo centralizar'>
-                <FontAwesomeIcon icon='mobile-alt' />
-              </div>
-              <h2 className='mt-4 mb-4'>Serviço 2</h2>
-              <p>
-                Sed semper feugiat tortor, id cursus lectus sagittis sed. Phasellus sagittis est arcu, eu aliquam turpis semper se
-              </p>
+                <FontAwesomeIcon icon={data.home.serDoisIcone} />
+              </div> 
+              <h2 className='mt-4 mb-4'>{data.home.serDoisTitulo}</h2>
+              <p>{data.home.serDoisDesc}</p>
             </div>
             <div className='col-md-4'>
               <div className='rounded-circle circulo centralizar'>
-              <FontAwesomeIcon icon='network-wired' />
+                <FontAwesomeIcon icon={data.home.serTresIcone} />
               </div>
-              <h2 className='mt-4 mb-4'>Serviço 3</h2>
-              <p>
-                vitae porttitor lorem porta. Integer tristique eu metus id molestie.
-              </p>
+              <h2 className='mt-4 mb-4'>{data.home.serTresTitulo}</h2>
+              <p>{data.home.serTresDesc}</p>
             </div>
           </div>
         </Container>
@@ -93,6 +88,11 @@ function Home() {
       <Rodape />
     </div>
   )
+}
+export async function getServerSideProps() {
+  const response = await fetch(`http://localhost:8080/home`)
+  const data = await response.json();
+  return { props: { data } };
 }
 
 export default Home;
