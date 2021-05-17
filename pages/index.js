@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Menu from '../componets/Menu';
 import Rodape from '../componets/Rodape';
 
-import { Container, Jumbotron } from 'reactstrap';
+import { Button, Container, Jumbotron } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -47,11 +47,16 @@ function Home({ data }) {
         </Container>
       </Jumbotron>
 
-      <Jumbotron fluid className='sevicos'>
+      <Jumbotron fluid className='servicos'>
         <style>
           {`.servicos{
             background-color: #fff;
             margin-bottom: 0rem !important;
+          }.btn-custom{
+	          border-radius: 50px;
+          }.btn-icon {
+            padding: 15px;
+            background-color: #56657c;
           }`}
         </style>
         <Container className='text-center'>
@@ -61,8 +66,8 @@ function Home({ data }) {
           </div>
           <div className='row'>
             <div className='col-md-4'>
-              <div className='rounded-circle circulo centralizar'>
-                <FontAwesomeIcon icon={data.home.serUmIcone} />
+              <div className='rounded-circle circulo centralizar' >
+                <Button className="btn btn-custom btn-icon " href="http://localhost:3000/orcamento" size="lg"> <FontAwesomeIcon icon={data.home.serUmIcone} /></Button>
               </div>
               <h2 className='mt-4 mb-4'>{data.home.serUmTitulo}</h2>
               <p>{data.home.serUmDesc}</p>
@@ -70,7 +75,7 @@ function Home({ data }) {
             <div className='col-md-4'>
               <div className='rounded-circle circulo centralizar'>
                 <FontAwesomeIcon icon={data.home.serDoisIcone} />
-              </div> 
+              </div>
               <h2 className='mt-4 mb-4'>{data.home.serDoisTitulo}</h2>
               <p>{data.home.serDoisDesc}</p>
             </div>
