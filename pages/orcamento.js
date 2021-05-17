@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Alert } from 'reactstrap';
 
 import Menu from '../componets/Menu';
 import Rodape from '../componets/Rodape';
@@ -13,6 +14,12 @@ function Orcamento() {
     phone: "",
     whatsApp: "",
     project: ""
+  })
+
+  const [response, setResponse] = useState({
+    formSave: false,
+    type: '',
+    message: ''
   })
 
   const onChangeInput = e => setOcamento({ ...orcamento, [e.target.name]: e.target.value })
@@ -31,12 +38,21 @@ function Orcamento() {
       const responseEnv = await res.json();
 
       if (responseEnv.error) {
-        alert(responseEnv.message)
+        setResponse({
+          type: 'error',
+          message: responseEnv.message
+        })
       } else {
-        alert(responseEnv.message)
+        setResponse({
+          type: 'success',
+          message: responseEnv.message
+        })
       }
-    }catch (err) {
-      alert("ERRO: orçamento nao enviado com sucesso")
+    } catch (err) {
+      setResponse({
+        type: 'error',
+        message: 'ERRO: orçamento nao enviado com sucesso'
+      })
     }
   }
   return (
@@ -61,18 +77,20 @@ function Orcamento() {
         </Container>
       </Jumbotron>
 
-      <Jumbotron fluid className="form-orcamento">
+      <Jumbotron fluid className="form-orcamento" >
         <style>
           {`.form-orcamento{
-              padding-top: 80px;
-              padding-bottom: 80px;
+              padding-top: 3%;
+              padding-bottom: 3%;
               background-color: #fff;
               margin-bottom: 0rem !important;
             }`}
         </style>
         <Container>
+          {response.type === 'error' ? <Alert color="danger">{response.message}</Alert> : ""}
+          {response.type === 'success' ? <Alert color="primary">{response.message}</Alert> : ""}
           <Form onSubmit={sendOrcamento}>
-            <FormGroup className='mt-3'>
+            <FormGroup >
               <Label for="name">Nome</Label>
               <Input type="text" name="name" id="name" placeholder="preencha com o nome completo"
                 onChange={onChangeInput} />
