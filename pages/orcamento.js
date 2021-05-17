@@ -28,6 +28,8 @@ function Orcamento() {
     e.preventDefault();
     console.log(orcamento);
 
+    setResponse({ formSave: true })
+
     try {
       const res = await fetch('http://localhost:8080/orcamento', {
         method: 'POST',
@@ -39,17 +41,20 @@ function Orcamento() {
 
       if (responseEnv.error) {
         setResponse({
+          formSave: false,
           type: 'error',
           message: responseEnv.message
         })
       } else {
         setResponse({
+          formSave: false,
           type: 'success',
           message: responseEnv.message
         })
       }
     } catch (err) {
       setResponse({
+        formSave: false,
         type: 'error',
         message: 'ERRO: orçamento nao enviado com sucesso'
       })
@@ -87,8 +92,10 @@ function Orcamento() {
             }`}
         </style>
         <Container>
+
           {response.type === 'error' ? <Alert color="danger">{response.message}</Alert> : ""}
           {response.type === 'success' ? <Alert color="primary">{response.message}</Alert> : ""}
+
           <Form onSubmit={sendOrcamento}>
             <FormGroup >
               <Label for="name">Nome</Label>
@@ -120,10 +127,12 @@ function Orcamento() {
                 onChange={onChangeInput} />
             </FormGroup>
 
-
-            <Button type='submit' outline color='info' className='mt-3'>Solicitar orçamento</Button>
+            {response.formSave ? <Button type='submit' outline color='info' className='mt-3' disabled>Enviando...</Button>: 
+            <Button type='submit' outline color='info' className='mt-3'>Solicitar orçamento</Button>}
+ 
           </Form>
         </Container>
+        
       </Jumbotron>
       <Rodape />
     </div>
